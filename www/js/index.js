@@ -8,27 +8,25 @@ var default_major = 0;
 var actions;
 
 document.addEventListener('deviceready', function() {
+      document.getElementById('save').addEventListener(
+          'click', saveSettings);
+      document.getElementById('startListening').addEventListener(
+          'click', startListening);
+      document.getElementById('stop').addEventListener(
+          'click', stopListening);
 
-    setTimeout(function() {
-        config = loadConfig();
-        document.getElementById('save').addEventListener(
-            'click', saveSettings);
-        document.getElementById('startListening').addEventListener(
-            'click', startListening);
-        document.getElementById('stop').addEventListener(
-            'click', stopListening);
-        beaconRegion = createBeaconRegion(config);
-        actions = {
-            start: {
-                monitor: cordova.plugins.locationManager.startMonitoringForRegion,
-                range: cordova.plugins.locationManager.startRangingBeaconsInRegion
-            },
-            stop: {
-                monitor: cordova.plugins.locationManager.stopMonitoringForRegion,
-                range: cordova.plugins.locationManager.stopRangingBeaconsInRegion
-            }
-        }
-    }, 5000);
+      loadConfig();
+
+      actions = {
+          start: {
+              monitor: cordova.plugins.locationManager.startMonitoringForRegion,
+              range: cordova.plugins.locationManager.startRangingBeaconsInRegion
+          },
+          stop: {
+              monitor: cordova.plugins.locationManager.stopMonitoringForRegion,
+              range: cordova.plugins.locationManager.stopRangingBeaconsInRegion
+          }
+      };
 
 }, false);
 
@@ -56,16 +54,8 @@ function startListening() {
     beaconRegion = createBeaconRegion(getConfig());
 
     var logToDom = function(message) {
-        var e = document.createElement('label');
-        e.innerText = message;
-
-        var br = document.createElement('br');
-        var br2 = document.createElement('br');
-        document.body.appendChild(e);
-        document.body.appendChild(br);
-        document.body.appendChild(br2);
-
-        window.scrollTo(0, window.document.height);
+        var e = document.getElementById('log');
+        e.innerText += '\n\n\n' + message;
     };
 
     var delegate = new cordova.plugins.locationManager.Delegate();

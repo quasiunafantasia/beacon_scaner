@@ -11,7 +11,7 @@
     </head>
     <body>
 
-        uuid: <input name="uuid" width=90%>
+        uuid: <input name="uuid" style="width: 90%;">
         <br>
         identifier: <input name="identifier">
         <br>
@@ -31,6 +31,14 @@
         <br>
         <button id="stop">stop</button>
         <br>
+        log:
+        <div id="log" style="
+            overflow-y: scroll;
+            width: 80%;
+            background-color: gray;
+            height: 300px;
+        ">
+        </div>
 
 
         <script type="text/javascript" src="cordova.js"></script>
