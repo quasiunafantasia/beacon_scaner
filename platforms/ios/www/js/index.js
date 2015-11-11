@@ -94,16 +94,6 @@ function startListening() {
 
     cordova.plugins.locationManager.setDelegate(delegate);
 
-    try {
-
-        if (/iPad|iPhone|iPod/.test(navigator.platform)) {
-            cordova.plugins.locationManager.requestWhenInUseAuthorization();
-        }
-    }
-    catch (e) {
-
-    }
-
     actions.start[action].call(cordova.plugins.locationManager, beaconRegion)
         .fail(console.error)
         .done();
